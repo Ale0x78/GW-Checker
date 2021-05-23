@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/Ale0x78/effective-spork#readme",
   "dependencies": {
-    "@actions/core": "^1.3.0",
+    "@actions/exec": "^1.0.4",
     "@actions/github": "^5.0.0"
+  },
+  "devDependencies": {
+    "@actions/core": "^1.3.0"
   }
 }
