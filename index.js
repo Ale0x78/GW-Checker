@@ -3,9 +3,7 @@ const github = require('@actions/github');
 const fs = require('fs');
 
 try {
-fs.readdirSync('./').forEach(file => {
-    console.log(file);
-  });
+  console.log(fs.readdirSync('./'));
 } catch (error) {
   core.setFailed(error.message);
 }
