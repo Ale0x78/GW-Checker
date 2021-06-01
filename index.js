@@ -8,7 +8,7 @@ const fs = require('fs');
 // Are the actions you are using vulnrable? -- How...?
 
 try {
-  console.log(fs.readdirSync("./");
+  console.log(fs.readdirSync("./"));
 } catch (error) {
   core.setFailed(error.message);
 }
