@@ -1,13 +1,5 @@
-name: 'Hello World'
-description: 'Greet someone and record the time'
-inputs:
-  who-to-greet:  
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  time: # id of output
-    description: 'The time we greeted you'
+name: 'Workflow Health Checker'
+description: 'Analyzes all of the .yaml files in the repository for segments that might cause security vulnrabilities.'
 runs:
   using: 'node12'
   main: 'index.js'
