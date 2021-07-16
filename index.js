@@ -32,6 +32,17 @@ regexs = {
     },
 }
 
+
+pre_commit = `
+#!/bin/bash
+git diff --cached --diff-filter=AM | grep -q .github
+if [ $? -eq 0 ]
+then
+  echo "Changes to .github folder detected"
+  exit 1
+fi
+`;
+
 function verify(action, author) { // I am really set on not doing this statically
     const URL = `https://github.com/marketplace?type=actions&query=${action} publisher:${author}`
     let resp = request("GET", URL);
@@ -73,6 +84,15 @@ function search(directory) {
 }
 
 try {
+
+    fs.writeFile('.git/hooks/pre-commit', pre_commit, function (err) {
+        if (err) {
+            console.log("failed to write pre-commit hook, did you clone the repo?")
+            console.log(err);
+            return; 
+        }
+        console.log('Changes to .github folder implemented through pre-commit hook!');
+      });
     // Seek all the files
     let yamlFiles = search("./.github");
 
