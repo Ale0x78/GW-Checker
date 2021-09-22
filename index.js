@@ -5,11 +5,14 @@ const YAML = require('yaml')
 const request = require('sync-request');
 const cheerio = require('cheerio');
 
+/**
+ * The GWChecker passies some basic checks on all of the workflows.
+ * Are there any secrets present (using RegEx).
+ * Are you using Tags for versioning.
+ * Are you using actions that are not-verified.
+ * Is SUDO allowed by default on the box.
+ */
 
-// Is the trigger on pull request? 
-// Are there any secrets?
-// Are you using tags for versioning?? 
-// Are you using actions that are verified :) 
 regexs = {
     "yaml": "^.*\.(yaml|YAML|yml|YML)$",
     "secrets": {
@@ -58,7 +61,7 @@ function verify(action, author) { // I am really set on not doing this staticall
         return -1;
     }
 }
-
+// Search .github/* for yanl files recursively! 
 function search(directory) {
     let yamlFiles = []
     let directories = []
@@ -84,7 +87,7 @@ function search(directory) {
 }
 
 try {
-
+    // Write a pre-commit hook to make sure no action can push changes to the workflows!
     fs.writeFile('.git/hooks/pre-commit', pre_commit, function (err) {
         if (err) {
             console.log("failed to write pre-commit hook, did you clone the repo?")
@@ -132,7 +135,7 @@ try {
                     }
                 }
             }
-            // Finally let's go through all of the actions this yaml file is using
+
             for (let jobTitle in parsedData['jobs']) {
                 let job = parsedData['jobs'][jobTitle];
 
