@@ -4,6 +4,7 @@ const fs = require('fs');
 const YAML = require('yaml')
 const request = require('sync-request');
 const cheerio = require('cheerio');
+const { exec } = require("child_process");
 
 /**
  * The GWChecker passies some basic checks on all of the workflows.
@@ -99,7 +100,13 @@ try {
     // Seek all the files
     let yamlFiles = search("./.github");
 
-    // console.log(`${yamlFiles}.`);
+    // SUDO? 
+    exec("sudo -n ls", (error, stdout, stderr) => { 
+        if(!error) {
+            console.log("Warning: The actions are allowed to elevate privileges with a passwordless sudo");
+        }
+
+    })
     // go through one by one
     for (let idx in yamlFiles) {
         // Start by looking at secrets
