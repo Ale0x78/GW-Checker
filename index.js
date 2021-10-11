@@ -120,7 +120,8 @@ try {
             for (let option in regexs.secrets) {
                 let match = data.match(regexs.secrets[option])
                 if (match) {
-                    console.log(`\tFound ${option} in ${file}: ${match}.`)
+                    match.forEach(e => console.log(`\tFound ${option} in ${file}: ${e}.`));
+                    
                 }
             }
             // Now let's look at the actions you are using and how you are versioning them
@@ -128,16 +129,16 @@ try {
             if (Array.isArray(parsedData['on'])) { // If we are dealing with an array, we just need to loop through all of the elements
                 for (let elementIDX in parsedData['on']) {
                     if (parsedData['on'][elementIDX] === "pull_request") {
-                        console.log(`\tWorkflow can be triggered using a pull requests due to: ${JSON.stringify(parsedData['on'])}.`);
+                        console.log(`\tWorkflow can be triggered using a pull request due to: ${JSON.stringify(parsedData['on'])}.`);
                     }
                 }
             } else { // Otherwise it's an object and we need to loop through the keys
                 for (let element in parsedData['on']) {
                     if (element === "pull_request") {
-                        console.log(`\tWorkflow can be triggered using a pull requests due to: ${JSON.stringify(parsedData['on'])}.`);
+                        console.log(`\tWorkflow can be triggered using a pull request due to: ${JSON.stringify(parsedData['on'])}.`);
                     }
                     if (element === "pull_request_target") {
-                        console.log(`\tWorkflow can be triggered using a pull requests due to: ${JSON.stringify(parsedData['on'])}.`);
+                        console.log(`\tWorkflow can be triggered using a pull request due to: ${JSON.stringify(parsedData['on'])}.`);
                     }
                 }
             }
