@@ -151,7 +151,7 @@ try {
                         let uses = step['uses'];
                         let versioning = uses.split("@")[1];
                         let name = uses.split("@")[0]
-                        if (versioning != "HEAD" && (versioning.length < 7 || versioning.match(/\.|-/))) {
+                        if (versioning != "HEAD" && (versioning.length < 40 || versioning.match(/\.|-/))) {
                             console.log(`\tWorkflow uses ${name} with a developer control tag ${versioning} for versioning, consider using a commit hash.`);
                         }
                         let marketplaceStatus = verify(name.split('/')[1], name.split('/')[0]);
