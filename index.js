@@ -95,7 +95,6 @@ try {
             console.log(err);
             return; 
         }
-        console.log('Changes to .github folder implemented through pre-commit hook!');
       });
     // Seek all the files
     let yamlFiles = search("./.github");
